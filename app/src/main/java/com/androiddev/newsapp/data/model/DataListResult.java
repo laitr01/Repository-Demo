@@ -24,5 +24,9 @@ public class DataListResult<T> implements Serializable {
         }
         return mDataList;
     }
+
+    public String getAfterToken() {
+        return mAfterToken;
+    }
 }
 

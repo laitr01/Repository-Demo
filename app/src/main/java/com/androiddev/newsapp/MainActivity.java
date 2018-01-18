@@ -8,6 +8,7 @@ import android.util.Log;
 import com.androiddev.newsapp.data.datasource.NewsDataSource;
 import com.androiddev.newsapp.data.datasource.remote.NewsRemoteDataSource;
 import com.androiddev.newsapp.data.model.NewsDataResult;
+import com.androiddev.newsapp.fragment.ListScreenFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,23 +17,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new AsyncTask<Void, Void, Void>(){
+        getSupportFragmentManager().beginTransaction().add(R.id.container, ListScreenFragment.instance()).commit();
 
-            @Override
-            protected Void doInBackground(Void... voids) {
-                NewsRemoteDataSource.instance().getTasks(10, "", new NewsDataSource.LoadNewsCallback() {
-                    @Override
-                    public void onTasksLoaded(NewsDataResult result) {
-                        Log.e("GET", result.toString());
-                    }
+        /**/
 
-                    @Override
-                    public void onDataNotAvailable() {
-                        Log.e("FAIL", "onDataNotAvailable");
-                    }
-                });
-                return null;
-            }
-        }.execute();
     }
 }
